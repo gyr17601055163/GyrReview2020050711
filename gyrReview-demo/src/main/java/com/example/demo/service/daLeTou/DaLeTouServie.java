@@ -1,34 +1,27 @@
 /**
  * Copyright (C), 2018-2020, TODO有限公司
- * FileName: TestJiHe
+ * FileName: DaLeTouServie
  * Author:   gyr
- * Date:     2020/6/28 14:06
+ * Date:     2020/8/22 22:08
  * Description:
  */
-package com.example.demo.Ajava.for集合;
+package com.example.demo.service.daLeTou;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Vector;
 
-public class TestJiHe {
-
-    List arrayList = new ArrayList();
-
-    List linkedList = new LinkedList();
-
-    List vector = new Vector();
+@Service
+public class DaLeTouServie {
 
 
-    Map map = new LinkedHashMap();
-
-    public static void main(String[] args) {
-
-
+    public String getData(){
         int a=(int)(Math.random()*35)+1;
 
         int b;
@@ -115,16 +108,18 @@ public class TestJiHe {
 
         System.out.print("\t\n");
 
-
-        int h=(int)(Math.random()*12)+1;//选出的0-11加上1赋值给h变量变成了1-12
+        //选出的0-11加上1赋值给h变量变成了1-12
+        int h=(int)(Math.random()*12)+1;
 
         int i;
 
         for(;;){
 
-            i=(int)(Math.random()*12)+1;//选出的0-11加上1赋值给i变量变成了1-12
+            //选出的0-11加上1赋值给i变量变成了1-12
+            i=(int)(Math.random()*12)+1;
 
-            if(i==h){//如果i等于h，下面重新随机选，只有不等于h才跳出此循环
+            //如果i等于h，下面重新随机选，只有不等于h才跳出此循环
+            if(i==h){
 
                 i=(int)(Math.random()*12)+1;
 
@@ -136,8 +131,39 @@ public class TestJiHe {
 
         }
 
+        System.out.print("\t\t");
 
-        System.out.print("体彩大乐透选号：["+a+" "+b+" "+c+" "+d+" "+e+" + "+h+" "+i+"]");
+        JSONArray jsonArray1 = new JSONArray();
+
+        int q[]={a,b,c,d,e};
+
+        //对数组作升序排列
+        Arrays.sort(q);
+
+        for(int j=0;j<q.length;j++){
+
+            System.out.print(q[j]+"\t");
+
+            jsonArray1.add(q[j]);
+
+        }
+
+        System.out.print("┼"+"\t");
+
+        JSONArray jsonArray2 = new JSONArray();
+
+        int s[]={h,i};
+
+        Arrays.sort(s);
+
+        for(int j=0;j<s.length;j++){
+
+            System.out.print(s[j]+"\t");
+
+            jsonArray2.add(s[j]);
+
+        }
+
 
         System.out.print("\t\n");
 
@@ -145,6 +171,6 @@ public class TestJiHe {
 
         System.out.print("\t\n");
 
+        return jsonArray1+"┼"+jsonArray2;
     }
-
 }
