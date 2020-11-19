@@ -3,6 +3,7 @@ package com.example.demo.web.forRedis幂等性控制;
 import com.example.demo.annotation.MdxApi;
 import com.example.demo.common.util.FreemarkerUtils;
 import com.example.demo.common.util.UID;
+import com.example.demo.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,24 +15,12 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
+
 @RestController
-public class MdxController {
+public class MdxController extends BaseController {
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;
-
-    /**
-     * 生成code的接口
-     * @return
-     */
-    @RequestMapping("getCode")
-    public String getCode(){
-        //生成code
-        String uuid16 = UID.getUUID16();
-        //将code存入redis中并设置过期时间
-        redisTemplate.opsForValue().set(uuid16,"",1,TimeUnit.HOURS);
-        return uuid16;
-    }
 
     /**
      * 要进行幂等性校验的方法，通过校验之后进行的业务操作方法（例如支付操作）
