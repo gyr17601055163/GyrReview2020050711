@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @RestController
-public class MdxController extends BaseController {
+public class MdxController{
 
     @Autowired
     private RedisTemplate<String,String> redisTemplate;

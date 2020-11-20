@@ -15,6 +15,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -23,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Collections;
 
 @Aspect
+@Component
 public class aopMaxInterceptor {
 
     @Autowired
@@ -30,8 +32,9 @@ public class aopMaxInterceptor {
 
     /**
      * 定义切面表达式
+     * web.*.*.*(..) web包下面的所有包，下面的所有类，下面的所有方法（所有参数）
      */
-    @Pointcut("execution(public * com.example.demo.web.*.*(..))")
+    @Pointcut("execution(public * com.example.demo.web.*.*.*(..))")
     public void pointCut(){
 
     }
@@ -61,7 +64,7 @@ public class aopMaxInterceptor {
     }
 
     public boolean codeCheck(String code){
-        String lua="if redis.call('get',KEYS[1]) then return redis.call('del',KEYS[1]) else return 0";
+        String lua="if redis.call('get',KEYS[1]) then return redis.call('del',KEYS[1]) else return 0 end";
 
         DefaultRedisScript<Long> defaultRedisScript=new DefaultRedisScript<>();
 
