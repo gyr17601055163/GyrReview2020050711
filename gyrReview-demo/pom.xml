@@ -108,6 +108,25 @@
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
+        <!--整合redisson-->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.13.1</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.redisson</groupId>
+                    <artifactId>redisson-spring-data-22</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-data-21</artifactId>
+            <version>3.13.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
